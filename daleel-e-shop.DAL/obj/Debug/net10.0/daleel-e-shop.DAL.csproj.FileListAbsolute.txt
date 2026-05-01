@@ -1,0 +1,14 @@
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\bin\Debug\net10.0\daleel-e-shop.DAL.deps.json
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\bin\Debug\net10.0\daleel-e-shop.DAL.dll
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\bin\Debug\net10.0\daleel-e-shop.DAL.pdb
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.GeneratedMSBuildEditorConfig.editorconfig
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.AssemblyInfoInputs.cache
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.AssemblyInfo.cs
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.csproj.CoreCompileInputs.cache
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.dll
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\refint\daleel-e-shop.DAL.dll
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.pdb
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\ref\daleel-e-shop.DAL.dll
+e:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\bin\Debug\net10.0\daleel-e-shop.DAL.runtimeconfig.json
+e:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.csproj.AssemblyReference.cache
+e:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.genruntimeconfig.cache

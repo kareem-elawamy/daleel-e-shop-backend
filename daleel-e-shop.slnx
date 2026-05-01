@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="daleel-e-shop.BLL/daleel-e-shop.BLL.csproj" />
+  <Project Path="daleel-e-shop.DAL/daleel-e-shop.DAL.csproj" />
+  <Project Path="daleel-e-shop/daleel-e-shop.csproj" />
+</Solution>

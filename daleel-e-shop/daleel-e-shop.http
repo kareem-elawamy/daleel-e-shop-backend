@@ -1,0 +1,6 @@
+@daleel_e_shop_HostAddress = http://localhost:5011
+
+GET {{daleel_e_shop_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
