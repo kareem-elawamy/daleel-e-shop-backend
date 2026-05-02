@@ -166,3 +166,4 @@ E:\BUA\Project\daleel-e-shop\daleel-e-shop\obj\Release\net10.0\refint\daleel-e-s
 E:\BUA\Project\daleel-e-shop\daleel-e-shop\obj\Release\net10.0\daleel-e-shop.pdb
 E:\BUA\Project\daleel-e-shop\daleel-e-shop\obj\Release\net10.0\daleel-e-shop.genruntimeconfig.cache
 E:\BUA\Project\daleel-e-shop\daleel-e-shop\obj\Release\net10.0\ref\daleel-e-shop.dll
+E:\BUA\Project\daleel-e-shop\daleel-e-shop\obj\Release\net10.0\daleel-e-shop.sourcelink.json

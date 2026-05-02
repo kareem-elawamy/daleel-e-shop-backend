@@ -102,6 +102,18 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// Configure CORS to allow all
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
+
 var app = builder.Build();
 
 // Seed Database
@@ -129,6 +141,9 @@ app.UseHttpsRedirection();
 
 // Serve static files (like images)
 app.UseStaticFiles();
+
+// Enable CORS
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();

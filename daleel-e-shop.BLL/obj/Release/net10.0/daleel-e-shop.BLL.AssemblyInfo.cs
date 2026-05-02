@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("daleel-e-shop.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4dcf8bcb4d9ca1e7713933da0832a27e75e13ef")]
 [assembly: System.Reflection.AssemblyProductAttribute("daleel-e-shop.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("daleel-e-shop.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
