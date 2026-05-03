@@ -166,4 +166,3 @@ E:\BUA\Project\daleel-e-shop\daleel-e-shop\bin\Debug\net10.0\zh-Hans\Microsoft.C
 E:\BUA\Project\daleel-e-shop\daleel-e-shop\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 E:\BUA\Project\daleel-e-shop\daleel-e-shop\bin\Debug\net10.0\daleel-e-shop.staticwebassets.runtime.json
 E:\BUA\Project\daleel-e-shop\daleel-e-shop\obj\Debug\net10.0\daleel-e-shop.sourcelink.json
-E:\BUA\Project\daleel-e-shop\daleel-e-shop\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

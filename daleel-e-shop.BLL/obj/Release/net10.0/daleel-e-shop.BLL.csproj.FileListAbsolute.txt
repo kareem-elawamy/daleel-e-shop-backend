@@ -13,3 +13,4 @@ E:\BUA\Project\daleel-e-shop\daleel-e-shop.BLL\obj\Release\net10.0\daleel-e-shop
 E:\BUA\Project\daleel-e-shop\daleel-e-shop.BLL\obj\Release\net10.0\refint\daleel-e-shop.BLL.dll
 E:\BUA\Project\daleel-e-shop\daleel-e-shop.BLL\obj\Release\net10.0\daleel-e-shop.BLL.pdb
 E:\BUA\Project\daleel-e-shop\daleel-e-shop.BLL\obj\Release\net10.0\ref\daleel-e-shop.BLL.dll
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.BLL\obj\Release\net10.0\daleel-e-shop.BLL.sourcelink.json

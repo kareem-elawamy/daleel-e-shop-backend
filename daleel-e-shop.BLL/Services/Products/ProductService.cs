@@ -20,10 +20,12 @@ namespace daleel_e_shop.BLL.Services.Products
             _fileService = fileService;
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllAsync()
+        public async Task<PagedResult<ProductDto>> GetAllAsync(int page = 1, int pageSize = 20)
         {
-            var products = await _unitOfWork.Products.FindAsync(p => true, new[] { "SubCategory", "Images", "Reviews" });
-            return products.Select(MapToDto);
+            var all = await _unitOfWork.Products.FindAsync(p => true, new[] { "SubCategory", "Images", "Reviews" });
+            var totalCount = all.Count();
+            var items = all.Skip((page - 1) * pageSize).Take(pageSize).Select(MapToDto).ToList();
+            return new PagedResult<ProductDto> { Items = items, TotalCount = totalCount, Page = page, PageSize = pageSize };
         }
 
         public async Task<ProductDto?> GetByIdAsync(int id)
@@ -33,12 +35,14 @@ namespace daleel_e_shop.BLL.Services.Products
             return MapToDto(product);
         }
 
-        public async Task<IEnumerable<ProductDto>> GetBySubCategoryAsync(int subCategoryId)
+        public async Task<PagedResult<ProductDto>> GetBySubCategoryAsync(int subCategoryId, int page = 1, int pageSize = 20)
         {
-            var products = await _unitOfWork.Products.FindAsync(
+            var all = await _unitOfWork.Products.FindAsync(
                 p => p.SubCategoryId == subCategoryId && p.IsActive,
                 new[] { "SubCategory", "Images", "Reviews" });
-            return products.Select(MapToDto);
+            var totalCount = all.Count();
+            var items = all.Skip((page - 1) * pageSize).Take(pageSize).Select(MapToDto).ToList();
+            return new PagedResult<ProductDto> { Items = items, TotalCount = totalCount, Page = page, PageSize = pageSize };
         }
 
         public async Task<PagedResult<ProductDto>> SearchAsync(ProductSearchQuery query)
@@ -261,6 +265,54 @@ namespace daleel_e_shop.BLL.Services.Products
 
             await _unitOfWork.CompleteAsync();
             return true;
+        }
+
+        public async Task<PagedResult<ProductDto>> GetDealsAsync(int page = 1, int pageSize = 20)
+        {
+            var all = await _unitOfWork.Products.FindAsync(
+                p => p.IsActive && p.DiscountPrice != null && p.DiscountPrice < p.Price,
+                new[] { "SubCategory", "Images", "Reviews" });
+            var sorted = all.OrderByDescending(p => p.CreatedAt).ToList();
+            var totalCount = sorted.Count;
+            var items = sorted.Skip((page - 1) * pageSize).Take(pageSize).Select(MapToDto).ToList();
+            return new PagedResult<ProductDto> { Items = items, TotalCount = totalCount, Page = page, PageSize = pageSize };
+        }
+
+        public async Task<PagedResult<ProductDto>> GetBestSellersAsync(int page = 1, int pageSize = 20)
+        {
+            var orderItems = await _unitOfWork.OrderItems.GetAllAsync();
+            var bestSellerIds = orderItems
+                .GroupBy(oi => oi.ProductId)
+                .OrderByDescending(g => g.Sum(oi => oi.Quantity))
+                .Select(g => g.Key)
+                .ToList();
+
+            List<ProductDto> orderedDtos;
+
+            if (!bestSellerIds.Any())
+            {
+                // Fallback: return top rated products if no orders exist
+                var fallback = await _unitOfWork.Products.FindAsync(p => p.IsActive, new[] { "SubCategory", "Images", "Reviews" });
+                orderedDtos = fallback
+                    .OrderByDescending(p => p.Reviews != null && p.Reviews.Any() ? p.Reviews.Average(r => r.Rating) : 0)
+                    .Select(MapToDto)
+                    .ToList();
+            }
+            else
+            {
+                var products = await _unitOfWork.Products.FindAsync(
+                    p => bestSellerIds.Contains(p.Id) && p.IsActive,
+                    new[] { "SubCategory", "Images", "Reviews" });
+                orderedDtos = bestSellerIds
+                    .Select(id => products.FirstOrDefault(p => p.Id == id))
+                    .Where(p => p != null)
+                    .Select(MapToDto!)
+                    .ToList();
+            }
+
+            var totalCount = orderedDtos.Count;
+            var items = orderedDtos.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            return new PagedResult<ProductDto> { Items = items, TotalCount = totalCount, Page = page, PageSize = pageSize };
         }
 
         private ProductDto MapToDto(Product product)

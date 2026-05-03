@@ -14,6 +14,7 @@ using daleel_e_shop.DAL.Data;
 using daleel_e_shop.DAL.Models;
 using daleel_e_shop.DAL.Repositories;
 using daleel_e_shop.Data;
+using daleel_e_shop.Services.AIChat;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,13 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
+
+// Configure HTTP Client Factory for Gemini API
+builder.Services.AddHttpClient();
+
+// Configure AI Chat Services
+builder.Services.AddScoped<IGeminiApiClient, GeminiApiClient>();
+builder.Services.AddScoped<IGeminiWebSocketHandler, GeminiWebSocketHandler>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
@@ -147,6 +155,9 @@ app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Enable WebSockets for AI Chat voice endpoint
+app.UseWebSockets();
 
 app.MapControllers();
 

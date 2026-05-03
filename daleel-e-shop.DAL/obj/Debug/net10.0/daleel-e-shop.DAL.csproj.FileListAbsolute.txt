@@ -12,3 +12,4 @@ E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\ref\daleel-e-sh
 e:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\bin\Debug\net10.0\daleel-e-shop.DAL.runtimeconfig.json
 e:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.csproj.AssemblyReference.cache
 e:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.genruntimeconfig.cache
+E:\BUA\Project\daleel-e-shop\daleel-e-shop.DAL\obj\Debug\net10.0\daleel-e-shop.DAL.sourcelink.json

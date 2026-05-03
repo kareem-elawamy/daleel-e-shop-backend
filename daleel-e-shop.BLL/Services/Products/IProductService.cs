@@ -7,9 +7,9 @@ namespace daleel_e_shop.BLL.Services.Products
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDto>> GetAllAsync();
+        Task<PagedResult<ProductDto>> GetAllAsync(int page = 1, int pageSize = 20);
         Task<ProductDto?> GetByIdAsync(int id);
-        Task<IEnumerable<ProductDto>> GetBySubCategoryAsync(int subCategoryId);
+        Task<PagedResult<ProductDto>> GetBySubCategoryAsync(int subCategoryId, int page = 1, int pageSize = 20);
         Task<PagedResult<ProductDto>> SearchAsync(ProductSearchQuery query);
         Task<ProductDto> CreateAsync(CreateProductDto dto);
         Task<ProductDto?> UpdateAsync(int id, CreateProductDto dto);
@@ -18,5 +18,7 @@ namespace daleel_e_shop.BLL.Services.Products
         Task<ProductImageDto?> AddProductImageAsync(int productId, IFormFile image, bool isPrimary = false);
         Task<bool> DeleteProductImageAsync(int imageId);
         Task<bool> SetPrimaryImageAsync(int productId, int imageId);
+        Task<PagedResult<ProductDto>> GetDealsAsync(int page = 1, int pageSize = 20);
+        Task<PagedResult<ProductDto>> GetBestSellersAsync(int page = 1, int pageSize = 20);
     }
 }

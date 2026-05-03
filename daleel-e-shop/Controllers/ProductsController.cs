@@ -19,10 +19,24 @@ namespace daleel_e_shop.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var products = await _productService.GetAllAsync();
+            var products = await _productService.GetAllAsync(page, pageSize);
             return Ok(products);
+        }
+
+        [HttpGet("deals")]
+        public async Task<IActionResult> GetDeals([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        {
+            var deals = await _productService.GetDealsAsync(page, pageSize);
+            return Ok(deals);
+        }
+
+        [HttpGet("best-sellers")]
+        public async Task<IActionResult> GetBestSellers([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        {
+            var bestSellers = await _productService.GetBestSellersAsync(page, pageSize);
+            return Ok(bestSellers);
         }
 
         [HttpGet("{id}")]
@@ -34,9 +48,9 @@ namespace daleel_e_shop.Controllers
         }
 
         [HttpGet("by-subcategory/{subCategoryId}")]
-        public async Task<IActionResult> GetBySubCategory(int subCategoryId)
+        public async Task<IActionResult> GetBySubCategory(int subCategoryId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var products = await _productService.GetBySubCategoryAsync(subCategoryId);
+            var products = await _productService.GetBySubCategoryAsync(subCategoryId, page, pageSize);
             return Ok(products);
         }
 
