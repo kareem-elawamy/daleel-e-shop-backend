@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("daleel-e-shop.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efc92371ca20a03d5217a85d265070dc1645970f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c80584e0ce25a6dbf0bca0487925b50ed38f6e9b")]
 [assembly: System.Reflection.AssemblyProductAttribute("daleel-e-shop.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("daleel-e-shop.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

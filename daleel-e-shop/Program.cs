@@ -14,7 +14,6 @@ using daleel_e_shop.DAL.Data;
 using daleel_e_shop.DAL.Models;
 using daleel_e_shop.DAL.Repositories;
 using daleel_e_shop.Data;
-using daleel_e_shop.Services.AIChat;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +28,11 @@ builder.Services.AddControllers();
 
 // Configure DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 3,
+            maxRetryDelay: TimeSpan.FromSeconds(10),
+            errorNumbersToAdd: null)));
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -56,10 +59,6 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 // Configure HTTP Client Factory for Gemini API
 builder.Services.AddHttpClient();
-
-// Configure AI Chat Services
-builder.Services.AddScoped<IGeminiApiClient, GeminiApiClient>();
-builder.Services.AddScoped<IGeminiWebSocketHandler, GeminiWebSocketHandler>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
@@ -145,19 +144,23 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Daleel Shop API v1");
 });
 
-app.UseHttpsRedirection();
+// Enable CORS FIRST — before any redirect or auth middleware
+app.UseCors("AllowAll");
+
+// Only redirect to HTTPS in production (dev frontend uses HTTP)
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 // Serve static files (like images)
 app.UseStaticFiles();
 
-// Enable CORS
-app.UseCors("AllowAll");
+// Enable WebSockets for AI Chat voice endpoint
+app.UseWebSockets();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-// Enable WebSockets for AI Chat voice endpoint
-app.UseWebSockets();
 
 app.MapControllers();
 
