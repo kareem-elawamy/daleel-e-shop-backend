@@ -1,5 +1,9 @@
 using System.Text.Json;
+using System.Text;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace daleel_e_shop.Services.AIChat
 {

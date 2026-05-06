@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using daleel_e_shop.Services.AIChat;
+using daleel_e_shop.BLL.DTOs.AIChat;
 
 namespace daleel_e_shop.Controllers
 {

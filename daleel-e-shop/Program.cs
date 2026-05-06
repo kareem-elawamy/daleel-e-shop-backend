@@ -10,6 +10,7 @@ using daleel_e_shop.BLL.Services.Cart;
 using daleel_e_shop.BLL.Services.Reviews;
 using daleel_e_shop.BLL.Services.Notifications;
 using daleel_e_shop.BLL.Services.Dashboard;
+using daleel_e_shop.Services.AIChat;
 using daleel_e_shop.DAL.Data;
 using daleel_e_shop.DAL.Models;
 using daleel_e_shop.DAL.Repositories;
@@ -59,6 +60,7 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 // Configure HTTP Client Factory for Gemini API
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<IGeminiApiClient, GeminiApiClient>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
