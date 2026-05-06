@@ -3,6 +3,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using daleel_e_shop.Services.AIChat;
 
 namespace daleel_e_shop.Controllers
 {
@@ -11,6 +12,7 @@ namespace daleel_e_shop.Controllers
         private readonly IConfiguration _configuration;
         private readonly ILogger<AIChatController> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IGeminiApiClient _geminiApiClient;
 
         private const string GeminiLiveModel = "gemini-3.1-flash-live-preview";
         private const string GeminiTextModel = "gemini-3-flash-preview";
@@ -18,11 +20,12 @@ namespace daleel_e_shop.Controllers
         private const string GeminiTextEndpoint = "https://generativelanguage.googleapis.com/v1beta/models/{0}:generateContent?key={1}";
         private const string SystemPrompt = "You are the Daleel AI Assistant, a helpful and knowledgeable shopping concierge for Daleel e-shop. You help users find products, compare options, understand delivery and payment methods (Aramex delivery, Tabby split payments), and answer questions. Be professional, concise, and insightful. Reply in the user's language.";
 
-        public AIChatController(IConfiguration configuration, ILogger<AIChatController> logger, IHttpClientFactory httpClientFactory)
+        public AIChatController(IConfiguration configuration, ILogger<AIChatController> logger, IHttpClientFactory httpClientFactory, IGeminiApiClient geminiApiClient)
         {
             _configuration = configuration;
             _logger = logger;
             _httpClientFactory = httpClientFactory;
+            _geminiApiClient = geminiApiClient;
         }
 
         // ── TEXT FLOW: HTTP POST → Gemini REST API ──
@@ -77,6 +80,92 @@ namespace daleel_e_shop.Controllers
             {
                 _logger.LogError(ex, "[TextChat] Error");
                 return StatusCode(500, new { error = "An unexpected error occurred." });
+            }
+        }
+
+        /// <summary>
+        /// Analyzes a product image using Gemini Vision and returns
+        /// { category, keywords, dominant_color, description } for visual product search.
+        /// No authentication required.
+        /// </summary>
+        [HttpPost("analyze-image")]
+        public async Task<ActionResult<ImageAnalysisResponseDto>> AnalyzeImage(
+            [FromBody] ImageAnalysisRequestDto request,
+            CancellationToken cancellationToken)
+        {
+            if (request == null || string.IsNullOrWhiteSpace(request.ImageBase64))
+            {
+                return BadRequest(new ImageAnalysisResponseDto
+                {
+                    Success = false,
+                    Error = "Image data cannot be empty"
+                });
+            }
+
+            // Strip the data-URL prefix if the client sent a full data URL
+            var base64 = request.ImageBase64;
+            if (base64.Contains(','))
+                base64 = base64[(base64.IndexOf(',') + 1)..];
+
+            var mimeType = string.IsNullOrWhiteSpace(request.MimeType)
+                ? "image/jpeg"
+                : request.MimeType.Split(';')[0].Trim();
+
+            try
+            {
+                _logger.LogInformation("Processing image analysis request, mime={Mime}", mimeType);
+
+                var rawJson = await _geminiApiClient.AnalyzeImageAsync(base64, mimeType, cancellationToken);
+
+                if (rawJson == null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new ImageAnalysisResponseDto
+                    {
+                        Success = false,
+                        Error = "Gemini Vision did not return a result"
+                    });
+                }
+
+                var parsed = JsonSerializer.Deserialize<JsonElement>(rawJson);
+
+                var category = parsed.TryGetProperty("category", out var c) ? c.GetString() : null;
+                var description = parsed.TryGetProperty("description", out var d) ? d.GetString() : null;
+                var dominantColor = parsed.TryGetProperty("dominant_color", out var dc) ? dc.GetString() : null;
+
+                var keywords = new List<string>();
+                if (parsed.TryGetProperty("keywords", out var kw) && kw.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var item in kw.EnumerateArray())
+                        if (item.GetString() is string s) keywords.Add(s);
+                }
+
+                _logger.LogInformation("Image analysis: category={Category}, keywords={Count}", category, keywords.Count);
+
+                return Ok(new ImageAnalysisResponseDto
+                {
+                    Success = true,
+                    Category = category,
+                    Keywords = keywords,
+                    DominantColor = dominantColor,
+                    Description = description
+                });
+            }
+            catch (OperationCanceledException)
+            {
+                return StatusCode(StatusCodes.Status408RequestTimeout, new ImageAnalysisResponseDto
+                {
+                    Success = false,
+                    Error = "Request timeout"
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error in analyze-image endpoint");
+                return StatusCode(StatusCodes.Status500InternalServerError, new ImageAnalysisResponseDto
+                {
+                    Success = false,
+                    Error = "An unexpected error occurred"
+                });
             }
         }
 
@@ -139,6 +228,22 @@ namespace daleel_e_shop.Controllers
                 _logger.LogError(ex, "[STT] Error");
                 return StatusCode(500, new { error = "Transcription error" });
             }
+        }
+
+        /// <summary>
+        /// Voice flow endpoint using WebSocket for real-time audio communication with Gemini
+        /// </summary>
+        /// <returns>WebSocket upgrade</returns>
+        [HttpGet("ws")]
+        public async Task GetWebSocket()
+        {
+            // This endpoint seems redundant or a placeholder compared to VoiceWebSocket
+            // But we keep it to avoid breaking potential client references.
+            if (!HttpContext.WebSockets.IsWebSocketRequest) { HttpContext.Response.StatusCode = 400; return; }
+            var apiKey = _configuration["Gemini:ApiKey"];
+            if (string.IsNullOrWhiteSpace(apiKey)) { HttpContext.Response.StatusCode = 503; return; }
+            using var clientWs = await HttpContext.WebSockets.AcceptWebSocketAsync();
+            await VoiceProxy(clientWs, apiKey);
         }
 
         // ── VOICE FLOW: WebSocket → Gemini Live API (AUDIO only) ──

@@ -3,7 +3,15 @@
   "WorkspaceRootPath": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{79377A05-3635-DEF5-1F82-79B70A5E84E5}|daleel-e-shop\\daleel-e-shop.csproj|d:\\freelance\\daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+=======
+      "AbsoluteMoniker": "D:0:0:{79377A05-3635-DEF5-1F82-79B70A5E84E5}|daleel-e-shop\\daleel-e-shop.csproj|e:\\bua\\project\\daleel-e-shop\\daleel-e-shop\\services\\aichat\\geminiapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79377A05-3635-DEF5-1F82-79B70A5E84E5}|daleel-e-shop\\daleel-e-shop.csproj|solutionrelative:daleel-e-shop\\services\\aichat\\geminiapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79377A05-3635-DEF5-1F82-79B70A5E84E5}|daleel-e-shop\\daleel-e-shop.csproj|e:\\bua\\project\\daleel-e-shop\\daleel-e-shop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+>>>>>>> 080a8ac (ennnd)
       "RelativeMoniker": "D:0:0:{79377A05-3635-DEF5-1F82-79B70A5E84E5}|daleel-e-shop\\daleel-e-shop.csproj|solutionrelative:daleel-e-shop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
@@ -39,19 +47,36 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GeminiApiClient.cs",
+              "DocumentMoniker": "E:\\BUA\\Project\\daleel-e-shop\\daleel-e-shop\\Services\\AIChat\\GeminiApiClient.cs",
+              "RelativeDocumentMoniker": "daleel-e-shop\\Services\\AIChat\\GeminiApiClient.cs",
+              "ToolTip": "E:\\BUA\\Project\\daleel-e-shop\\daleel-e-shop\\Services\\AIChat\\GeminiApiClient.cs",
+              "RelativeToolTip": "daleel-e-shop\\Services\\AIChat\\GeminiApiClient.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAwwIgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T06:15:15.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop\\appsettings.json",
               "RelativeDocumentMoniker": "daleel-e-shop\\appsettings.json",
               "ToolTip": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop\\appsettings.json",
               "RelativeToolTip": "daleel-e-shop\\appsettings.json",
+<<<<<<< HEAD
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA3AAAAAAAAAA==",
+=======
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA2AAAAAAAAAA==",
+>>>>>>> 080a8ac (ennnd)
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-05-01T20:33:44.102Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop\\Program.cs",
               "RelativeDocumentMoniker": "daleel-e-shop\\Program.cs",
@@ -63,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "daleel-e-shop.csproj",
               "DocumentMoniker": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop\\daleel-e-shop.csproj",
               "RelativeDocumentMoniker": "daleel-e-shop\\daleel-e-shop.csproj",
@@ -75,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "daleel-e-shop.BLL.csproj",
               "DocumentMoniker": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop.BLL\\daleel-e-shop.BLL.csproj",
               "RelativeDocumentMoniker": "daleel-e-shop.BLL\\daleel-e-shop.BLL.csproj",
@@ -87,7 +112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "global.cs",
               "DocumentMoniker": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop.BLL\\global.cs",
               "RelativeDocumentMoniker": "daleel-e-shop.BLL\\global.cs",
@@ -99,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "global.cs",
               "DocumentMoniker": "D:\\Freelance\\Daleel-e-shop\\daleel-e-shop-backend\\daleel-e-shop.DAL\\global.cs",
               "RelativeDocumentMoniker": "daleel-e-shop.DAL\\global.cs",
